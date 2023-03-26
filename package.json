@@ -1,0 +1,19 @@
+{
+  "name": "compare",
+  "version": "1.0.0",
+  "description": "比较中英文文件，翻译出缺失的英文",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "request": "^2.88.2"
+  },
+  "scripts": {
+    "json": "node src/toJson.js",
+    "compare": "node src/compare-file.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
+  console.log("🚀 ~ file: package.json:19 ~ 比较中英文文件，翻译出缺失的英文:", 比较中英文文件，翻译出缺失的英文)
