@@ -3,9 +3,9 @@
  */
 require('babel-register')({ presets: ['env'] });
 const path = require('path');
-const { writeFile, getFileNamesByFolder } = require('./utils');
+const { writeFile, getFilenamesByFolder } = require('./utils');
 
-// js 文件存放的目录
+// js 文件存放的目录，可自行替换，如 'const inputFolder = D:\\workspace\\locale\\zh_CN';
 const inputFolder = path.join(__dirname, '../example/zh_CN');
 // 输出文件夹的路径
 const outputFolder = path.join(__dirname, '../json');
@@ -17,25 +17,25 @@ const excludeArr = [];
  * @param {string} folderPath 目录路径
  * @returns {Array} 文件名的数组
  */
-async function getFileNames(folderPath) {
+async function getFilenames(folderPath) {
   // 读取指定路径下的所有文件名
-  const fileNames = await getFileNamesByFolder(folderPath);
+  const filenames = await getFilenamesByFolder(folderPath);
 
-  return fileNames.filter(
-    (fileName) =>
-      path.extname(fileName).toLowerCase() === '.js' &&
-      !excludeArr.includes(fileName)
+  return filenames.filter(
+    (filename) =>
+      path.extname(filename).toLowerCase() === '.js' &&
+      !excludeArr.includes(filename)
   );
 }
 
 async function start() {
-  const fileNames = await getFileNames(inputFolder);
-  fileNames.forEach((fileName) => {
-    const filePath = path.join(inputFolder, fileName);
+  const filenames = await getFilenames(inputFolder);
+  filenames.forEach((filename) => {
+    const filePath = path.join(inputFolder, filename);
     // 获取文件中 export default 的内容
     const data = require(filePath).default;
     const jsonText = JSON.stringify(data, null, 2);
-    writeFile(jsonText, fileName.replace('.js', '.json'), outputFolder);
+    writeFile(jsonText, filename.replace('.js', '.json'), outputFolder);
   });
   console.log(`执行完毕，输出目录 ${outputFolder}`);
 }

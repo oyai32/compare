@@ -6,15 +6,15 @@ const _ = require('lodash');
 /**
  * 写文件
  * @param {string} content 内容
- * @param {string} fileName 文件名
+ * @param {string} filename 文件名
  * @param {string} dirname 文件路径
  */
-function writeFile(content, fileName, dirname) {
+function writeFile(content, filename, dirname) {
   if (!fs.existsSync(dirname)) {
     fs.mkdirSync(dirname);
   }
 
-  const jsonFilePath = path.join(dirname, fileName);
+  const jsonFilePath = path.join(dirname, filename);
   fs.writeFileSync(jsonFilePath, content);
 }
 
@@ -23,7 +23,7 @@ function writeFile(content, fileName, dirname) {
  * @param {string} folderPath 目录路径
  * @returns {Array} 文件名的数组
  */
-async function getFileNamesByFolder(folderPath) {
+async function getFilenamesByFolder(folderPath) {
   // 读取指定路径下的所有文件
   var readdir = util.promisify(fs.readdir);
   const files = await readdir(folderPath);
@@ -80,5 +80,5 @@ module.exports = {
   writeFile,
   getFileContent,
   getNotExistKeyPath,
-  getFileNamesByFolder,
+  getFilenamesByFolder,
 };
